@@ -28,8 +28,8 @@ class WoopraController extends ContainerAware
         if ($options['idle_timeout'] && $options['domain'])
         {
             return $this->container->get('templating')->renderResponse('MarbemacAnalyticsBundle:Woopra:initialize.html.twig', array(
-                'domain' => $options['idle_timeout'],
-                'idleTimeout' => $options['domain']
+                'domain' => $options['domain'],
+                'idleTimeout' => $options['idle_timeout']
             ), $response);
         }
 
