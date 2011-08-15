@@ -7,7 +7,9 @@ function woopraReady(tracker) {
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
         tracker.addVisitorProperty('name', '{{ app.user.fullName }}');
         tracker.addVisitorProperty('email', '{{ app.user.email }}');
-        tracker.addVisitorProperty('avatar', '{{ url('image_show', {'imageData': imageDataEncode(app.user.currentProfileImage, 100, 100)}) }}');
+        {% if userGravater %}
+            tracker.addVisitorProperty('avatar', '{{ userGravatar }}');
+        {% endif %}
     {% endif %}
 
     tracker.track();
