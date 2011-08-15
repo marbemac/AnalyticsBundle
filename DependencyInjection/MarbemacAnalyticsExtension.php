@@ -24,15 +24,33 @@ class MarbemacAnalyticsExtension extends Extension
         $config = $processor->processConfiguration($configuration, $configs);
 
         $variables = array(
-                        'analytics_manager',
+                        'use_analytics',
                         'use_woopra',
-                        'woopra_idle_timeout',
-                        'woopra_domain'
                     );
 
         foreach ($variables as $attribute) {
             $container->setParameter('marbemac_analytics.options.'.$attribute, $config[$attribute]);
         }
+
+        $variables = array(
+                        'manager',
+                    );
+
+        foreach ($variables as $attribute) {
+            $container->setParameter('marbemac_analytics.options.'.$attribute, $config['analytics'][$attribute]);
+        }
+
+        $variables = array(
+                        'manager',
+                        'idle_timeout',
+                        'domain'
+                    );
+
+        foreach ($variables as $attribute) {
+            $container->setParameter('marbemac_woopra.options.'.$attribute, $config['woopra'][$attribute]);
+        }
+
+
     }
 
     /**

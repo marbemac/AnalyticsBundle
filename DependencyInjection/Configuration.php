@@ -26,10 +26,24 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('analytics_manager')->defaultValue('Marbemac\AnalyticsBundle\Document\AnalyticsManager')->cannotBeEmpty()->end()
+                ->booleanNode('use_analytics')->defaultFalse()->end()
+                ->arrayNode('analytics')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('manager')->defaultValue('Marbemac\AnalyticsBundle\Document\AnalyticsManager')->cannotBeEmpty()->end()
+                    ->end()
+                ->end()
+
                 ->booleanNode('use_woopra')->defaultFalse()->end()
-                ->scalarNode('woopra_idle_timeout')->defaultValue('30000')->cannotBeEmpty()->end()
-                ->scalarNode('woopra_domain')->defaultValue(null)->cannotBeEmpty()->end()
+                ->arrayNode('woopra')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('manager')->defaultValue('Marbemac\AnalyticsBundle\Document\WoopraManager')->cannotBeEmpty()->end()
+                        ->scalarNode('idle_timeout')->defaultValue('30000')->cannotBeEmpty()->end()
+                        ->scalarNode('domain')->defaultValue(null)->cannotBeEmpty()->end()
+                    ->end()
+                ->end()
+
             ->end();
 
         return $treeBuilder;

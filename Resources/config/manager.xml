@@ -5,8 +5,16 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="marbemac.manager.analytics" class="%marbemac_analytics.options.analytics_manager%">
+        <service id="marbemac.manager.analytics" class="%marbemac_analytics.options.manager%">
             <argument type="service" id="doctrine.odm.mongodb.document_manager" />
+        </service>
+        
+        <service id="marbemac.manager.woopra" class="%marbemac_woopra.options.manager%">
+            <argument type="service" id="doctrine.odm.mongodb.document_manager" />
+            <argument type="collection">
+                <argument key="domain">%marbemac_woopra.options.domain%</argument>
+                <argument key="idle_timeout">%marbemac_woopra.options.idle_timeout%</argument>
+            </argument>
         </service>
     </services>
 

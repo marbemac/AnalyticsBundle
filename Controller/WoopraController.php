@@ -23,14 +23,13 @@ class WoopraController extends ContainerAware
             return $response;
         }
 
-        if ($this->container->getParameter('marbemac_analytics_woopra_domain') && $this->container->getParameter('marbemac_analytics_woopra_idle_timeout'))
-        {
-            $domain = $this->container->getParameter('marbemac_analytics_woopra_domain');
-            $idleTimeout = $this->container->getParameter('marbemac_analytics_woopra_idle_timeout');
+        $options = $this->container->get('marbemac.manager.woopra')->getOptions();
 
+        if ($options['idle_timeout'] && $options['domain'])
+        {
             return $this->container->get('templating')->renderResponse('MarbemacAnalyticsBundle:Woopra:initialize.html.twig', array(
-                'domain' => $domain,
-                'idleTimeout' => $idleTimeout
+                'domain' => $options['idle_timeout'],
+                'idleTimeout' => $options['domain']
             ), $response);
         }
 
