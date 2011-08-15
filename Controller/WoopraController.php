@@ -23,7 +23,7 @@ class WoopraController extends ContainerAware
             return $response;
         }
 
-        if ($this->container->hasParameter('marbemac_analytics_woopra_domain') && $this->container->hasParameter('marbemac_analytics_woopra_idle_timeout'))
+        if ($this->container->getParameter('marbemac_analytics_woopra_domain') && $this->container->getParameter('marbemac_analytics_woopra_idle_timeout'))
         {
             $domain = $this->container->getParameter('marbemac_analytics_woopra_domain');
             $idleTimeout = $this->container->getParameter('marbemac_analytics_woopra_idle_timeout');

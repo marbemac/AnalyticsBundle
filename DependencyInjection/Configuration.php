@@ -29,7 +29,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('analytics_manager')->defaultValue('Marbemac\AnalyticsBundle\Document\AnalyticsManager')->cannotBeEmpty()->end()
                 ->booleanNode('use_woopra')->defaultFalse()->end()
                 ->scalarNode('woopra_idle_timeout')->defaultValue('30000')->cannotBeEmpty()->end()
-                ->scalarNode('woopra_domain')->end()
+                ->scalarNode('woopra_domain')->defaultValue(null)->cannotBeEmpty()->end()
             ->end();
 
         return $treeBuilder;
